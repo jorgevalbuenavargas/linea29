@@ -16,10 +16,11 @@ class CreateStopsTable extends Migration
         Schema::create('stops', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
-            $table->double('latitude', 8, 8);
-            $table->double('longitude', 8, 8);
+            $table->double('latitude', 11, 8);
+            $table->double('longitude', 11, 8);
             $table->integer('number');
-            $table->integer('branch_id')->references('id')->on('branches');
+            $table->unsignedInteger('branch_id');
+            $table->foreign('branch_id')->references('id')->on('branches');
             $table->timestamps();
         });
     }

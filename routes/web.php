@@ -23,4 +23,6 @@ Route::post('/branch', 'BranchController@add');
 
 Route::put('/branch/{id}','BranchController@update');
 
+Route::delete('/branch/{id}','BranchController@delete');
+
 Route::get('/stop','StopController@getAll');

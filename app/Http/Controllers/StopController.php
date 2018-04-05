@@ -10,5 +10,6 @@ class StopController extends Controller
     function getAll(){
         return Stop::all();
       }
-  
+     
+      
 }

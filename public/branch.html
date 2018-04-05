@@ -1,81 +1,13 @@
 <!doctype html>
 <html>
     <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Ramales</title>
         <script src="js/app.js"></script>
         <link rel="stylesheet" href="css/app.css">
         <link rel="stylesheet" href="css/fontawesome-free-5.0.9/web-fonts-with-css/css/fontawesome-all.min.css">
-        <script>
-            window.addEventListener("load",()=> {
-
-                let state = {branchs : [], newBranch : {}, editedBranch : {}, idBranch : ""}
-
-                function updateTable(){
-                    axios.get("/branch")
-                        .then((resp)=>state.branchs = resp.data)
-                        .catch((err)=>
-                            console.error(err.response.data)
-                        )
-                }
-
-                function createBranch(branch){
-                    axios.post("/branch", branch)
-                        .then((resp)=>{
-                            console.log(resp.data);
-                            updateTable();    
-                            cleanInputs();                     
-                            })
-                        .catch((err)=>
-                            console.error(err.response.data)
-                        )         
-                }
-
-                function cleanInputs(){
-                    document.getElementById("branchsName").value = null;
-                    document.getElementById("branchsSchedule").value = null;
-                }
-
-                function fillEditionForm(idBranch){
-                    axios.get("/branch/" + idBranch)
-                        .then((resp)=>{
-                            idBranch = resp.data.id;
-                            document.getElementById("editedBranchsId").value = resp.data.id;
-                            document.getElementById("editedBranchsName").value = resp.data.name;
-                            document.getElementById("editedBranchsSchedule").value = resp.data.schedule
-                        })                        
-                        .catch((err)=>
-                            console.error(err.response.data)
-                        )
-                }
-
-                function updateBranch(i, editedB){
-                    console.log(i)
-                    console.log(editedB)
-                    /*axios.put("/branch/" + id, editedBranch)
-                        .then((resp)=>{
-                            console.log(resp.data);
-                            updateTable();
-                        })                        
-                        .catch((err)=>
-                            console.error(err.response.data)
-                        )*/
-                }
-              
-
-                const app = new Vue({
-                    data: state,
-                    el: "#app-branch",
-                    methods : {
-                        createBranch : createBranch,
-                        cleanInputs : cleanInputs,
-                        fillEditionForm : fillEditionForm,
-                        updateBranch : updateBranch
-                    }
-                })
-
-                updateTable();
-               
-            })
-        </script>
+        <script src="js/branch.js"></script>
     </head>
     <body>
 
@@ -108,9 +40,12 @@
                                 <button type='button' class="btn btn-warning" style="margin:2px" data-toggle="modal" data-target="#editBranchForm_Modal" v-on:click="fillEditionForm(branch.id);">
                                         <i class="fas fa-edit"></i>
                                 </button>
-                                <button type='button' class="btn btn-danger" data-toggle="modal" data-target="#deleteBranchForm_Modal">
+                                <button type='button' class="btn btn-danger" data-toggle="modal" data-target="#deleteBranchForm_Modal" v-on:click="asignIdToDelete(branch.id);">
                                         <i class="fas fa-trash-alt"></i>
                                 </button>
+                                <a class="btn btn-primary" style="margin:2px" v-bind:href="'/stops.html?branch_id=' + branch.id">
+                                        <i class="fas fa-road"></i>
+                                </a>
                             </td>
                         </tr>        
                     </tbody>
@@ -149,19 +84,38 @@
                             <button type="button" class="close" data-dismiss="modal">&times;</button>
                         </div>
                         <div class="modal-body" id="editBranch_modalBody">
-                            <input type="hidden" id="editedBranchsId" v-model="idBranch">
                             <label for="editedBranchsName">Nombre del ramal:</label>
                             <input type="text" class="form-control" id="editedBranchsName" v-model="editedBranch.name">
                             <label for="editedBranchsSchedule">Horario:</label>
                             <input type="text" class="form-control" id="editedBranchsSchedule" v-model="editedBranch.schedule">    
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-primary" data-dismiss="modal" id="saveButton_editModal" v-on:click="updateBranch(idBranch, editedBranch);">Grabar</button>
+                            <button type="button" class="btn btn-primary" data-dismiss="modal" id="saveButton_editModal" v-on:click="updateBranch(editedBranch.id, editedBranch);">Grabar</button>
                             <button type="button" class="btn btn-danger" data-dismiss="modal" id="closeButton_editModal">Cerrar</button>
                         </div>
                     </div>
                 </div>          
             </div>
+
+            <!-- MODAL PARA CONFIRMAR LA ELIMINACIÓN DE UN REGISTRO -->
+            <div id="deleteBranchForm_Modal" class="modal fade" role="dialog">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h4 class="modal-title">Confirmar eliminación</h4>
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            </div>
+                            <div class="modal-body">
+                                <input type="hidden" class="form-control" id="deleteAuthorsId">
+                                <p>¿Estás seguro que deseas eliminar el registro?</p>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal" id="confirmDelete_button" v-on:click="deleteBranch(deletedId);">Si</button>
+                                <button type="button" class="btn btn-default" data-dismiss="modal" id="cancelDelete_button">No</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
         </div>        
     </body>
 </html>

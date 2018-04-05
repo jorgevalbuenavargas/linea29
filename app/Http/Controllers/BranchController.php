@@ -12,10 +12,16 @@ class BranchController extends Controller
     }
 
     function getById($id){
-        return Branch::findOrFail($id);
+        $branch = Branch::findOrFail($id);
+        $branch->stops;
+        return $branch;
     }
 
     function add(Request $req){
+        $req->validate([
+            'name' => 'required|unique:branches|max:191',
+            'schedule' => 'required|max:191'
+        ]);
         $branch = new Branch;
         $branch->name = $req->name;
         $branch->schedule = $req->schedule;
@@ -24,6 +30,10 @@ class BranchController extends Controller
     }
     
     function update($id,Request $req){
+        $req->validate([
+            'name' => 'required|unique:branches|max:191',
+            'schedule' => 'required|max:191'
+        ]);
         $branch = Branch::findOrFail($id);
         $branch->name = $req->name;
         $branch->schedule = $req->schedule;
@@ -33,5 +43,6 @@ class BranchController extends Controller
 
     function delete($id){
         Branch::findOrFail($id)->delete();
+        return "ok";
     }  
 }
