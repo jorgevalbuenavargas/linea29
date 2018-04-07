@@ -31,7 +31,7 @@ class BranchController extends Controller
     
     function update($id,Request $req){
         $req->validate([
-            'name' => 'required|unique:branches|max:191',
+            'name' => 'required|max:191',
             'schedule' => 'required|max:191'
         ]);
         $branch = Branch::findOrFail($id);

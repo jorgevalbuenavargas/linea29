@@ -2,7 +2,16 @@
 
 window.addEventListener("load", function(){
 
-    let state = {branchs : [], newBranch : {}, editedBranch : {}, idBranch : "", deletedId: ""}
+    let state = {
+        branchs : [], 
+        newBranch : {}, 
+        editedBranch : {}, 
+        idBranch : "", 
+        deletedId: ""}
+    
+    $(document).ready(function(){
+        $('[data-toggle="tooltip"]').tooltip();   
+    });
 
     function updateTable(){
         axios.get("/branch")
@@ -17,8 +26,7 @@ window.addEventListener("load", function(){
             .then((resp)=>{
                 console.log(resp.data);
                 updateTable();    
-                cleanInputs();
-                                     
+                cleanInputs();                                     
                 })
             .catch((err)=>
                 console.error(err.response.data)
@@ -27,8 +35,9 @@ window.addEventListener("load", function(){
     }
     
     function cleanInputs(){
-        document.getElementById("branchsName").value = null;
-        document.getElementById("branchsSchedule").value = null;
+        $("#branchsName").value = null;
+        $("#branchsSchedule").value = null;
+        state.newBranch = {}; 
     }
     
     function asignIdToDelete(id){
@@ -39,18 +48,13 @@ window.addEventListener("load", function(){
         axios.get("/branch/" + idBranch)
             .then((resp)=>{
                 state.editedBranch = resp.data;
-                document.getElementById("editedBranchsName").value = resp.data.name;
-                document.getElementById("editedBranchsSchedule").value = resp.data.schedule
             })                        
             .catch((err)=>
                 console.error(err.response.data)
             )
     }
     
-    function updateBranch(id, editedBranch){
-        console.log(id)
-        console.log(editedBranch)
-       
+    function updateBranch(id, editedBranch){      
         axios.put("/branch/" + id, editedBranch)
             .then((resp)=>{
                 console.log(resp.data);
@@ -62,9 +66,7 @@ window.addEventListener("load", function(){
         state.editedBranch = {}    
     }
     
-    function deleteBranch(id){
-        console.log(id)
-       
+    function deleteBranch(id){      
         axios.delete("/branch/" + id)
             .then((resp)=>{
                 console.log(resp.data);
@@ -89,5 +91,4 @@ window.addEventListener("load", function(){
     })
     
     updateTable();
-
 })

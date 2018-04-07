@@ -15,6 +15,9 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+
+/* Branch */
+
 Route::get('/branch','BranchController@getAll');
 
 Route::get('/branch/{id}','BranchController@getById');
@@ -25,4 +28,14 @@ Route::put('/branch/{id}','BranchController@update');
 
 Route::delete('/branch/{id}','BranchController@delete');
 
+/* Stops */
+
 Route::get('/stop','StopController@getAll');
+
+Route::get('/stop/{id}','StopController@getById');
+
+Route::post('/stop', 'StopController@add');
+
+Route::put('/stop/{id}','StopController@update');
+
+Route::delete('/stop/{id}','StopController@delete');

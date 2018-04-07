@@ -1,0 +1,12 @@
+body{
+    background-color: #c6c6c6;
+}
+
+.table_head {
+    background-color: #0d47a1;
+    color: white;
+}
+
+.table-hover tbody tr:hover{
+    background-color: #8d8d8d;
+}
