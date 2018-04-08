@@ -18,17 +18,58 @@
     </head>
 
     <body>
+        
+        <!-- BARRA DE NAVEGACIÓN -->
 
-        <div id="app-branch" style="margin-top: 50px" class="container">
+        <nav  class="navbar navbar-expand-md navbar-dark navbar-linea29">
+            
+            <a class="navbar-brand" href="#"><i class="fas fa-bus"></i></a>
+
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="collapsibleNavbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            <i class="fas fa-road"></i> Recorridos
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            <i class="fas fa-database"></i> Panel de Control
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            <i class="fas fa-user-plus"></i> Registrarse
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            <i class="fas fa-sign-in-alt"></i> Ingresar
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            <i class="fas fa-sign-out-alt"></i> Cerrar sesión
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+
+        <div id="app-branch" class="container-fluid">        
             
             <!-- Dashboard --> 
-            <div class="row justify-content-md-center">            
-                <h4 class="text text-center">Ramales</h4>
+            <div class="row justify-content-md-center" style="margin-top: 50px">            
+                <h1 class="text text-center">Ramales</h1>
             </div>
             
             <div class="row justify-content-md-center">
 
-                <div class="col-6" id="branchDashboard" style="margin-top: 50px">
+                <div class="col-md-6" id="branchDashboard" style="margin-top: 20px">
                     <button type='button' class="btn btn-primary" id="newBranchButton" data-toggle="modal" data-target="#newBranchForm_Modal" v-on:click="cleanInputs();">                        
                             <i class="fas fa-plus"></i>
                     </button>
@@ -67,7 +108,7 @@
                 <!--  Modal para el ingreso de nuevos ramales -->
 
                 <div id="newBranchForm_Modal" class="modal fade" role="dialog">
-                    <div class="modal-dialog">
+                    <div class="modal-dialog modal-dialog-centered">
                         <div class="modal-content">
                             <div class="modal-header">
                                 <h4 class="modal-title">Ingresa los siguientes datos:</h4>
@@ -90,7 +131,7 @@
                 <!--  Modal para modificar ramales existentes -->
 
                 <div id="editBranchForm_Modal" class="modal fade" role="dialog">
-                    <div class="modal-dialog">
+                    <div class="modal-dialog modal-dialog-centered">
                         <div class="modal-content">
                             <div class="modal-header">
                                 <h4 class="modal-title">Ingresa los siguientes datos:</h4>
@@ -112,24 +153,24 @@
 
                 <!-- MODAL PARA CONFIRMAR LA ELIMINACIÓN DE UN REGISTRO -->
                 <div id="deleteBranchForm_Modal" class="modal fade" role="dialog">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h4 class="modal-title">Confirmar eliminación</h4>
-                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                </div>
-                                <div class="modal-body">
-                                    <input type="hidden" class="form-control" id="deletedBranchsId">
-                                    <p>¿Estás seguro que deseas eliminar el registro?</p>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-default" data-dismiss="modal" id="confirmDelete_button" v-on:click="deleteBranch(deletedId);">Si</button>
-                                    <button type="button" class="btn btn-default" data-dismiss="modal" id="cancelDelete_button">No</button>
-                                </div>
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h4 class="modal-title">Confirmar eliminación</h4>
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            </div>
+                            <div class="modal-body">
+                                <input type="hidden" class="form-control" id="deletedBranchsId">
+                                <p>¿Estás seguro que deseas eliminar el registro?</p>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal" id="confirmDelete_button" v-on:click="deleteBranch(deletedId);">Si</button>
+                                <button type="button" class="btn btn-default" data-dismiss="modal" id="cancelDelete_button">No</button>
                             </div>
                         </div>
                     </div>
                 </div>
+            </div>
         </div>        
     </body>
 </html>

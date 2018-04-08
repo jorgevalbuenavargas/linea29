@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="es">
+
+    <head>
+
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <title>Registrarse</title>
+
+        <script src="js/app.js"></script>
+        <script src="js/user.js"></script>
+
+        <link rel="stylesheet" href="css/app.css">
+        <link rel="stylesheet" href="css/common.css">
+        <link rel="stylesheet" href="css/fontawesome-free-5.0.9/web-fonts-with-css/css/fontawesome-all.min.css">
+        
+    </head>
+
+    <body>
+
+        <!-- BARRA DE NAVEGACIÓN -->
+
+        <nav  class="navbar navbar-expand-md navbar-dark navbar-linea29">
+            
+            <a class="navbar-brand" href="#"><i class="fas fa-bus"></i></a>
+
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="collapsibleNavbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            <i class="fas fa-road"></i> Recorridos
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            <i class="fas fa-database"></i> Panel de Control
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            <i class="fas fa-user-plus"></i> Registrarse
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            <i class="fas fa-sign-in-alt"></i> Ingresar
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            <i class="fas fa-sign-out-alt"></i> Cerrar sesión
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+
+        <div id="app-user" class="container">
+
+            <div class="row justify-content-md-center" style="margin-top: 50px">            
+                <h1 class="text text-center">Ingresa los siguientes datos para registrarte:</h1>
+            </div>
+
+            <div class="row justify-content-md-center" style="margin-top: 50px">
+                <div class="form-group col-md-4">
+                    <label for="usersName">Nombre de usuario:</label>
+                    <input type="text" class="form-control" id="usersName">
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="usersEmail">Correo electrónico:</label>
+                    <input type="text" class="form-control" id="usersEmail">
+                </div>
+            </div>
+            <div class="row justify-content-md-center">
+                <div class="form-group col-md-4">
+                    <label for="password">Password:</label>
+                    <input type="password" class="form-control" id="password">
+                </div>
+                <div class="form-group col-md-4">
+                        <label for="confirmedPassword">Confirmar Password:</label>
+                        <input type="password" class="form-control" id="confirmedPassword">
+                </div>
+            </div>
+            
+            <div class="row justify-content-md-end">
+                <div class="col-3">
+                    <button type="button" class="btn btn-primary btn-lg" id="createUser_button">Enviar</button>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
