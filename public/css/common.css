@@ -29,3 +29,12 @@ body{
     color: white;
 }
 
+#map {
+    height: 400px;
+    width: 100%;
+}
+
+#map_inRoutes {
+    height: 400px;
+    width: 100%;
+}

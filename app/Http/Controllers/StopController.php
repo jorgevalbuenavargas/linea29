@@ -53,7 +53,6 @@ class StopController extends Controller
     function delete($id){
         Stop::findOrFail($id)->delete();
         return "ok";
-    }
-     
+    } 
       
 }
