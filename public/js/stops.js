@@ -68,12 +68,21 @@ function stopApp(){
             .then((resp)=>{
                 console.log(resp.data);
                 updatePage();    
-                cleanInputs();                                     
+                cleanInputs(); 
+                $("#closeButton_Modal").click();
+                $("#stopsList").notify(
+                    resp.data,
+                    { position:"top center", className:"success" }
+                ); 
+                state.newStop = {};                                        
                 })
-            .catch((err)=>
-                console.error(err.response.data)
-            )    
-        state.newStop = {};      
+            .catch((err)=>{
+                console.error(err.response.data.message); 
+                $("#saveButton_Modal").notify(
+                    "Ningún campo puede quedar vacío",
+                    { position:"left", className:"error" }
+                )
+            })
     }
     
     function cleanInputs(){
@@ -103,11 +112,20 @@ function stopApp(){
             .then((resp)=>{
                 console.log(resp.data);
                 updatePage();
+                $("#closeButton_editModal").click();
+                $("#stopsList").notify(
+                    resp.data,
+                    { position:"top center", className:"success" }
+                );
+                state.editedBranch = {}
             })                        
-            .catch((err)=>
-                console.error(err.response.data)
-            )
-        state.editedBranch = {}    
+            .catch((err)=>{
+                console.error(err.response.data.message); 
+                $("#saveButton_editModal").notify(
+                    "Ningún campo puede quedar vacío",
+                    { position:"left", className:"error" }
+                )
+            })       
     }
     
     function deleteStop(id){       
@@ -115,10 +133,18 @@ function stopApp(){
             .then((resp)=>{
                 console.log(resp.data);
                 updatePage();
+                $("#stopsList").notify(
+                    resp.data,
+                    { position:"top center", className:"success" }
+                ); 
             })                        
-            .catch((err)=>
-                console.error(err.response.data)
-            )  
+            .catch((err)=>{
+                console.error(err.response.data.message); 
+                $("#stopsList").notify(
+                    err.response.data.message,
+                    { position:"left", className:"error" }
+                )
+            })       
     }
 
     function updatePage(){

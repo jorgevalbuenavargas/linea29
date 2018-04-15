@@ -10,6 +10,7 @@
 
         <script src="js/app.js"></script>
         <script src="js/branch.js"></script>
+        <script type="text/javascript" src="js/notify.min.js"></script>
 
         <link rel="stylesheet" href="css/app.css">
         <link rel="stylesheet" href="css/common.css">
@@ -121,7 +122,7 @@
                                 <input type="text" class="form-control" id="branchsSchedule" v-model="newBranch.schedule">    
                             </div>
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-primary" data-dismiss="modal" id="saveButton_Modal" v-on:click="createBranch(newBranch);">Grabar</button>
+                                <button type="button" class="btn btn-primary" id="saveButton_Modal" v-on:click="createBranch(newBranch);">Grabar</button>
                                 <button type="button" class="btn btn-danger" data-dismiss="modal" id="closeButton_Modal" v-on:click="cleanInputs();">Cerrar</button>
                             </div>
                         </div>
@@ -144,7 +145,7 @@
                                 <input type="text" class="form-control" id="editedBranchsSchedule" v-model="editedBranch.schedule">    
                             </div>
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-primary" data-dismiss="modal" id="saveButton_editModal" v-on:click="updateBranch(editedBranch.id, editedBranch);">Grabar</button>
+                                <button type="button" class="btn btn-primary" id="saveButton_editModal" v-on:click="updateBranch(editedBranch.id, editedBranch);">Grabar</button>
                                 <button type="button" class="btn btn-danger" data-dismiss="modal" id="closeButton_editModal">Cerrar</button>
                             </div>
                         </div>

@@ -27,7 +27,7 @@ class BranchController extends Controller
         $branch->name = $req->name;
         $branch->schedule = $req->schedule;
         $branch->save();
-        return "ok";
+        return "Registro creado exitosamente";
     }
     
     function update($id,Request $req){
@@ -39,11 +39,11 @@ class BranchController extends Controller
         $branch->name = $req->name;
         $branch->schedule = $req->schedule;
         $branch->save();
-        return "ok";
+        return "Registro modificado con éxito";
       }
 
     function delete($id){
         Branch::findOrFail($id)->delete();
-        return "ok";
+        return "Registro eliminado exitosamente";
     }  
 }

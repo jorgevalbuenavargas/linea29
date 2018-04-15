@@ -29,7 +29,7 @@ class StopController extends Controller
         $stop->longitude = $req->longitude;
         $stop->branch_id = $req->branch_id;
         $stop->save();
-        return "ok";
+        return "Registro creado exitosamente";
     }
     
     function update($id,Request $req){
@@ -47,12 +47,12 @@ class StopController extends Controller
         $stop->longitude = $req->longitude;
         $stop->branch_id = $req->branch_id;
         $stop->save();
-        return "ok";
+        return "Registro modificado con éxito";
       }
 
     function delete($id){
         Stop::findOrFail($id)->delete();
-        return "ok";
+        return "Registro eliminado exitosamente";
     } 
       
 }

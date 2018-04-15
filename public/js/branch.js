@@ -7,7 +7,8 @@ window.addEventListener("load", function(){
         newBranch : {}, 
         editedBranch : {}, 
         idBranch : "", 
-        deletedId: ""}
+        deletedId: ""
+    }
     
     $(document).ready(function(){
         $('[data-toggle="tooltip"]').tooltip();   
@@ -26,12 +27,21 @@ window.addEventListener("load", function(){
             .then((resp)=>{
                 console.log(resp.data);
                 updateTable();    
-                cleanInputs();                                     
-                })
-            .catch((err)=>
-                console.error(err.response.data)
-            )    
-        state.newBranch = {};         
+                cleanInputs();
+                $("#closeButton_Modal").click();
+                $("#branchList").notify(
+                    resp.data,
+                    { position:"top center", className:"success" }
+                );       
+                state.newBranch = {};                              
+            })
+            .catch((err)=>{
+                console.error(err.response.data.message); 
+                $("#saveButton_Modal").notify(
+                    "Ningún campo puede quedar vacío",
+                    { position:"left", className:"error" }
+                )
+            })                 
     }
     
     function cleanInputs(){
@@ -59,11 +69,20 @@ window.addEventListener("load", function(){
             .then((resp)=>{
                 console.log(resp.data);
                 updateTable();
+                $("#closeButton_editModal").click();
+                $("#branchList").notify(
+                    resp.data,
+                    { position:"top center", className:"success" }
+                );
+                state.editedBranch = {}  
             })                        
-            .catch((err)=>
-                console.error(err.response.data)
-            )
-        state.editedBranch = {}    
+            .catch((err)=>{
+                console.error(err.response.data.message); 
+                $("#saveButton_editModal").notify(
+                    "Ningún campo puede quedar vacío",
+                    { position:"left", className:"error" }
+                )
+            })   
     }
     
     function deleteBranch(id){      
@@ -71,10 +90,18 @@ window.addEventListener("load", function(){
             .then((resp)=>{
                 console.log(resp.data);
                 updateTable();
+                $("#branchList").notify(
+                    resp.data,
+                    { position:"top center", className:"success" }
+                );   
             })                        
-            .catch((err)=>
-                console.error(err.response.data)
-            )  
+            .catch((err)=>{
+                console.error(err.response.data.message); 
+                $("#branchList").notify(
+                    "No es posible eliminar este Ramal debido a que tiene Paradas asociadas" + "\n,asegúrate de eliminarlas para poder eliminar el Ramal",
+                    { position:"top center", className:"error" }
+                )
+            })   
     }
 
     const app = new Vue({
