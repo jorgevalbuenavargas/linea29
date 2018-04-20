@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace Línea29\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
-use App\Branch;
+use Línea29\Http\Controllers\Controller;
+use Línea29\Branch;
 
 class BranchController extends Controller
 {

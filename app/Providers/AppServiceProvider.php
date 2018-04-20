@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Providers;
+namespace Línea29\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Schema;

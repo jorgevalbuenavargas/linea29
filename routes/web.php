@@ -12,30 +12,53 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('busRoutes');
 });
 
+/*Route::get('/', function () {
+    return view('welcome');
+});*/
+
+Route::get('/ramal', function () {
+    return view('branch');
+})->middleware('auth');
+
+Route::get('/paradas', function () {
+    return view('stops');
+})->middleware('auth');
 
 /* Branch */
 
-Route::get('/branch','BranchController@getAll');
+Route::get('/branch','BranchController@getAll')->middleware('auth');
 
-Route::get('/branch/{id}','BranchController@getById');
+Route::get('/branch/{id}','BranchController@getById')->middleware('auth');
 
-Route::post('/branch', 'BranchController@add');
+Route::post('/branch', 'BranchController@add')->middleware('auth');
 
-Route::put('/branch/{id}','BranchController@update');
+Route::put('/branch/{id}','BranchController@update')->middleware('auth');
 
-Route::delete('/branch/{id}','BranchController@delete');
+Route::delete('/branch/{id}','BranchController@delete')->middleware('auth');
 
 /* Stops */
 
-Route::get('/stop','StopController@getAll');
+Route::get('/stop','StopController@getAll')->middleware('auth');
 
-Route::get('/stop/{id}','StopController@getById');
+Route::get('/stop/{id}','StopController@getById')->middleware('auth');
 
-Route::post('/stop', 'StopController@add');
+Route::post('/stop', 'StopController@add')->middleware('auth');
 
-Route::put('/stop/{id}','StopController@update');
+Route::put('/stop/{id}','StopController@update')->middleware('auth');
 
-Route::delete('/stop/{id}','StopController@delete');
+Route::delete('/stop/{id}','StopController@delete')->middleware('auth');
+
+/* Recorridos */
+
+Route::get('/busRoutes','BranchController@getAll');
+
+Route::get('/busRoutes/{id}','BranchController@getById');
+
+// Otros
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home')->middleware('auth');

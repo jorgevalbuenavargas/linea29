@@ -1,6 +1,6 @@
 "use strict"
 
-function stopApp(){
+function routeApp(){
 
     let state = {
         branchs : [],
@@ -60,7 +60,7 @@ function stopApp(){
         if (branchId == ""){
             branchId = 1
         }
-        axios.get("branch/" + branchId)
+        axios.get("busRoutes/" + branchId)
             .then(resp => {
                 state.branch = resp.data
                 initMap()
@@ -72,7 +72,7 @@ function stopApp(){
     }
 
     function updateBranchsList(){
-        axios.get("/branch")
+        axios.get("/busRoutes")
             .then((resp)=>state.branchs = resp.data)
             .catch((err)=>
                 console.error(err.response.data)
@@ -92,3 +92,7 @@ function stopApp(){
     updateBranchsList()
     updateMap()
 }
+
+window.addEventListener("load", function(){
+    routeApp()
+})

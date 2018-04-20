@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace Línea29\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Stop;
+use Línea29\Stop;
 
 class StopController extends Controller
 {

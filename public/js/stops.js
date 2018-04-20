@@ -175,3 +175,7 @@ function stopApp(){
 
     updatePage()
 }
+
+window.addEventListener("load", function(){
+    stopApp()
+})

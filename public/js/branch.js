@@ -98,7 +98,7 @@ window.addEventListener("load", function(){
             .catch((err)=>{
                 console.error(err.response.data.message); 
                 $("#branchList").notify(
-                    "No es posible eliminar este Ramal debido a que tiene Paradas asociadas" + "\n,asegúrate de eliminarlas para poder eliminar el Ramal",
+                    "No es posible eliminar este Ramal debido a que tiene Paradas asociadas," + "\nasegúrate de eliminarlas para poder eliminar el Ramal",
                     { position:"top center", className:"error" }
                 )
             })   
