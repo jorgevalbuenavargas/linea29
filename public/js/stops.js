@@ -9,7 +9,7 @@ function stopApp(){
         deletedStop : ""
     }
 
-    var s = new URLSearchParams(window.location.search.substring(1));
+    let s = new URLSearchParams(window.location.search.substring(1));
     const branchId = s.get("branch_id");
 
     $(document).ready(function(){
@@ -18,29 +18,53 @@ function stopApp(){
 
     // Google Maps Begining //
 
-    var directionsDisplay;
-    var directionsService = new google.maps.DirectionsService();
-    var map;   
+    let directionsDisplay;
+    let directionsService = new google.maps.DirectionsService();
+    let map;
+    let markers = [];   
     
-    function initMap() {
+    setTimeout( ()=>{
         directionsDisplay = new google.maps.DirectionsRenderer();
-        var bsas = {lat: -34.6037, lng: -58.3816};
-        var mapOptions = {
+        let bsas = {lat: -34.6037, lng: -58.3816};
+        let mapOptions = {
           zoom:12,
           center: bsas
         }
         map = new google.maps.Map(document.getElementById('map'), mapOptions);
         directionsDisplay.setMap(map);
-    }
+    } , 100)
+
     
 
     function calcRoute(stops) {
 
-        const points = stops.map( s => ({lat:s.latitude,lng:s.longitude, id : s.number}))
+        markers.forEach( m => m.setMap(null) )
+
+        const points = stops.map( s => ({lat:s.latitude,lng:s.longitude, name : s.name , number : s.number, id : s.id}))
+        
+        points.forEach( p => {
+           const m = new google.maps.Marker({
+                position: p,
+                map: map,
+                label : String(p.number),
+                draggable : true
+            });
+            markers.push(m);
+            m.addListener("dragend",()=>{
+                const stop = {
+                    branch_id : branchId,
+                    latitude :  m.position.lat(),
+                    longitude : m.position.lng(),
+                    number : p.number,
+                    name : p.name
+                }
+                updateStop(p.id,stop)
+            });
+        });
 
         const waypoints =  points.slice(1, -1).map( p => ({ location : p , stopover : false}))
 
-        var request = {
+        let request = {
             origin: points[0],
             destination: points[points.length - 1],
             waypoints: waypoints,
@@ -66,15 +90,21 @@ function stopApp(){
         nStop.branch_id = state.branch.id;
         axios.post("/stop", nStop)
             .then((resp)=>{
-                console.log(resp.data);
-                updatePage();    
-                cleanInputs(); 
-                $("#closeButton_Modal").click();
-                $("#stopsList").notify(
-                    resp.data,
-                    { position:"top center", className:"success" }
-                ); 
-                state.newStop = {};                                        
+                if(resp.data != "El número de parada de este ramal ya existe"){
+                    updatePage();    
+                    cleanInputs(); 
+                    $("#closeButton_Modal").click();
+                    $("#stopsList").notify(
+                        resp.data,
+                        { position:"top center", className:"success" }
+                    ); 
+                    state.newStop = {};
+                }else {
+                    $("#saveButton_Modal").notify(
+                        resp.data,
+                        { position:"left", className:"error" }
+                    )
+                }                                 
                 })
             .catch((err)=>{
                 console.error(err.response.data.message); 
@@ -151,11 +181,11 @@ function stopApp(){
         axios.get("branch/" + branchId)
             .then(resp => {
                 state.branch = resp.data
-                initMap()
+                //initMap()
                 calcRoute(state.branch.stops)
             })
             .catch((err)=>
-            console.error(err.response.data)
+            console.error(err.response ? err.response.data : err)
         ) 
     }
     

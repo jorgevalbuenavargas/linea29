@@ -4,6 +4,7 @@
 <script src="{{ asset('js/stops.js') }}" defer></script>
 @endsection
 
+
 @section('content')
 
 <div id="app-stops" class="container">
@@ -98,7 +99,7 @@
                         </div>
                         <div class="modal-body" id="editStop_modalBody">                                    
                             <label for="editedStopsNumber">Número de parada:</label>
-                            <input type="number" min="1" class="form-control" id="editedStopsNumber" v-model="editedStop.number">
+                            <input type="number" min="1" class="form-control" disabled id="editedStopsNumber" v-model="editedStop.number">
                             <label for="editedStopsName">Nombre de la parada:</label>
                             <input type="text" class="form-control" id="editedStopsName" v-model="editedStop.name">
                             <label for="editedStopsLatitude">Latitud:</label>
@@ -144,3 +145,5 @@
 
 </div>
 @endsection
+
+

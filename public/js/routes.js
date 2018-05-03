@@ -26,7 +26,7 @@ function routeApp(){
     }
     
 
-    function calcRoute(stops) {
+    function calcRoute(stops,color) {
 
         const points = stops.map( s => ({lat:s.latitude,lng:s.longitude, id : s.number}))
 
@@ -43,7 +43,11 @@ function routeApp(){
             if (status == 'OK') {
                 directionsDisplay.setDirections(result);
                 directionsDisplay.setOptions({
-                    suppressMarkers: true
+                    suppressMarkers: true,
+                    polylineOptions : {
+                        strokeColor : color,
+                        visible: false
+                    }
                 });
             } else {
                 console.error(response);
@@ -53,7 +57,9 @@ function routeApp(){
 
     //Google Maps Api End //
 
-   
+    function colorById(id){
+        return "hsl(" + (id * 205) % 360 + " , 100%,50%)";
+    }
 
     function updateMap(){
         let branchId = document.getElementById("listOfBranchs").value;
@@ -64,7 +70,7 @@ function routeApp(){
             .then(resp => {
                 state.branch = resp.data
                 initMap()
-                calcRoute(state.branch.stops)
+                calcRoute(state.branch.stops,colorById(branchId))
             })
             .catch((err)=>
             console.error(err.response.data)
