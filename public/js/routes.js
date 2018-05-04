@@ -10,49 +10,63 @@ function routeApp(){
 
     // Google Maps Begining //
 
-    var directionsDisplay;
-    var directionsService = new google.maps.DirectionsService();
-    var map;   
+    let directionsDisplay;
+    let directionsService = new google.maps.DirectionsService();
+    let map;   
+    let routesDisplays = [];
     
-    function initMap() {
+    setTimeout( ()=>{
         directionsDisplay = new google.maps.DirectionsRenderer();
-        var bsas = {lat: -34.6037, lng: -58.3816};
-        var mapOptions = {
+        let bsas = {lat: -34.6037, lng: -58.3816};
+        let mapOptions = {
           zoom:12,
           center: bsas
         }
         map = new google.maps.Map(document.getElementById('map_inRoutes'), mapOptions);
         directionsDisplay.setMap(map);
-    }
-    
+    } , 100)
 
-    function calcRoute(stops,color) {
+    function setGoogleMapsDisplays(){
+        for (let branch of state.branchs){
+            routesDisplays[branch.id] = new google.maps.DirectionsRenderer();
+            axios.get("busRoutes/" + branch.id)
+                .then(resp => {
 
-        const points = stops.map( s => ({lat:s.latitude,lng:s.longitude, id : s.number}))
+                    branch = resp.data
+                    
+                    const points = branch.stops.map( s => ({lat:s.latitude,lng:s.longitude, id : s.number}))
+                    const waypoints =  points.slice(1, -1).map( p => ({ location : p , stopover : false}))
 
-        const waypoints =  points.slice(1, -1).map( p => ({ location : p , stopover : false}))
+                    let request = {
+                        origin: points[0],
+                        destination: points[points.length - 1],
+                        waypoints: waypoints,
+                        optimizeWaypoints: true,   
+                        travelMode: 'DRIVING'
+                    };
+                    
+                    let color = colorById(branch.id)
 
-        var request = {
-            origin: points[0],
-            destination: points[points.length - 1],
-            waypoints: waypoints,
-            optimizeWaypoints: true,
-            travelMode: 'DRIVING'
-          };
-          directionsService.route(request, function(result, status) {
-            if (status == 'OK') {
-                directionsDisplay.setDirections(result);
-                directionsDisplay.setOptions({
-                    suppressMarkers: true,
-                    polylineOptions : {
-                        strokeColor : color,
-                        visible: false
-                    }
-                });
-            } else {
-                console.error(response);
-            }
-        });
+                    directionsService.route(request, function(result, status) {
+                        if (status == 'OK') {
+                            routesDisplays[branch.id].setMap(map);
+                            routesDisplays[branch.id].setDirections(result);
+                            routesDisplays[branch.id].setOptions({
+                                suppressMarkers: true,
+                                polylineOptions : {
+                                    strokeColor : color,
+                                    visible: true
+                                }
+                            })
+                        } else {
+                            console.error(response);
+                        }
+                    })                    
+                })
+                .catch((err)=>
+                console.error(err.response.data)
+            )
+        }
     }
 
     //Google Maps Api End //
@@ -62,24 +76,23 @@ function routeApp(){
     }
 
     function updateMap(){
-        let branchId = document.getElementById("listOfBranchs").value;
-        if (branchId == ""){
-            branchId = 1
+
+        let checkedBranches = document.getElementsByClassName("checkedBranches") 
+        for (let checkedBranch of checkedBranches){            
+            if(!checkedBranch.checked){
+                routesDisplays[checkedBranch.value].setMap(null);
+            }else {
+                routesDisplays[checkedBranch.value].setMap(map);
+            }
         }
-        axios.get("busRoutes/" + branchId)
-            .then(resp => {
-                state.branch = resp.data
-                initMap()
-                calcRoute(state.branch.stops,colorById(branchId))
-            })
-            .catch((err)=>
-            console.error(err.response.data)
-        )        
     }
 
     function updateBranchsList(){
         axios.get("/busRoutes")
-            .then((resp)=>state.branchs = resp.data)
+            .then((resp)=>{
+                state.branchs = resp.data
+                setGoogleMapsDisplays()
+            })
             .catch((err)=>
                 console.error(err.response.data)
             )
@@ -96,7 +109,7 @@ function routeApp(){
     })
 
     updateBranchsList()
-    updateMap()
+    
 }
 
 window.addEventListener("load", function(){

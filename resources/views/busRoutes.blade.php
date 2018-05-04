@@ -21,9 +21,12 @@
                 <label for="branchsList">
                     <h3 class="text text-center">Listado de Ramales</h3>
                 </label>
-                <select class="form-control" id="listOfBranchs" v-on:change="updateMap();">
-                    <option v-for="branch of branchs" v-bind:value="branch.id">@{{ branch.name }}</option>
-                </select>
+                
+                <div  v-for="branch of branchs" class="form-check">
+                    <label class="form-check-label">
+                        <input type="checkbox" class="form-check-input checkedBranches" v-bind:value="branch.id" v-on:change="updateMap();" checked>@{{ branch.name }}
+                    </label>
+                </div>    
             </div>
         </div>
 
