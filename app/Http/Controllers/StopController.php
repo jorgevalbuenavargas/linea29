@@ -16,6 +16,19 @@ class StopController extends Controller
         return Stop::findOrFail($id);
     }
 
+    private function updateSequense($branchId){
+       $stops =  Stop::where("branch_id",$branchId)
+            ->orderBy("number")
+            ->orderBy("updated_at","desc")
+            ->get();
+        for($i = 0 ; $i < sizeof($stops) ; $i ++){
+            if($stops[$i]->number !== $i+1){
+                $stops[$i]->number = $i+1;
+                $stops[$i]->save();
+            }
+        }
+    }
+
     function add(Request $req){
         $req->validate([
             'name' => 'required',
@@ -24,14 +37,8 @@ class StopController extends Controller
             'longitude' => 'required'
         ]);
         
-        /* Valida que el número de parada no exista para el ramal */
-        $branch = Branch::findOrFail($req->branch_id);
-        $branch->stops;
-        foreach ($branch["stops"] as $stop){
-            if ($stop["number"] == $req->number){
-                return "El número de parada de este ramal ya existe";
-            } 
-        }
+        // TODO cambiar
+        $number = $req->number === 0 ? Stop::orderBy("number","desc")->first()->number + 1 : $req->number;
 
         $stop = new Stop;
         $stop->name = $req->name;
@@ -40,6 +47,7 @@ class StopController extends Controller
         $stop->longitude = $req->longitude;
         $stop->branch_id = $req->branch_id;
         $stop->save();
+        $this->updateSequense($req->branch_id);
         return "Registro creado exitosamente";
     }
     
@@ -59,11 +67,15 @@ class StopController extends Controller
         $stop->longitude = $req->longitude;
         $stop->branch_id = $req->branch_id;
         $stop->save();
+        $this->updateSequense($req->branch_id);
         return "Registro modificado con éxito";
       }
 
     function delete($id){
-        Stop::findOrFail($id)->delete();
+        $stop = Stop::findOrFail($id);
+        $branch_id = $stop->branch_id;
+        $stop->delete();
+        $this->updateSequense($branch_id);
         return "Registro eliminado exitosamente";
     } 
       

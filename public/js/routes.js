@@ -72,7 +72,7 @@ function routeApp(){
     //Google Maps Api End //
 
     function colorById(id){
-        return "hsl(" + (id * 205) % 360 + " , 100%,50%)";
+        return "hsl(" + ( 100 + id * 137.5077640) % 360 + " , 100%,50%)";
     }
 
     function updateMap(){
