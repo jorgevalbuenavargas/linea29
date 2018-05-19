@@ -34,7 +34,39 @@ function stopApp(){
         directionsDisplay.setMap(map);
     } , 100)
 
+    function setMapInNewStopModal(){
+        let directionsDisplay;
+        let directionsService = new google.maps.DirectionsService();
+        let map; 
+        
+        setTimeout( ()=>{
+            directionsDisplay = new google.maps.DirectionsRenderer();
+            let bsas = {lat: -34.6037, lng: -58.3816};
+            let mapOptions = {
+              zoom:12,
+              center: bsas
+            }
+            map = new google.maps.Map(document.getElementById('map_newModal'), mapOptions);
+            directionsDisplay.setMap(map);
     
+            var marker = new google.maps.Marker({
+                position: bsas,
+                map: map,
+                title: 'Click to zoom',
+                draggable : true
+            });
+        
+            marker.addListener('dragend', function() {
+                state.newStop.number = state.branch.stops[state.branch.stops.length-1].number + 1 
+                document.getElementById("stopsNumber").value = state.branch.stops[state.branch.stops.length-1].number + 1
+                state.newStop.latitude = marker.position.lat()
+                state.newStop.longitude = marker.position.lng()
+                document.getElementById("stopsLatitude").value = marker.position.lat()
+                document.getElementById("stopsLongitude").value = marker.position.lng()
+            });
+    
+        }, 500)
+    }
 
     function calcRoute(stops) {
 
@@ -199,7 +231,8 @@ function stopApp(){
             asignIdToDelete : asignIdToDelete,
             fillEditionForm : fillEditionForm,
             updateStop : updateStop,
-            deleteStop : deleteStop
+            deleteStop : deleteStop,
+            setMapInNewStopModal : setMapInNewStopModal
         }
     })
 

@@ -17,7 +17,7 @@
     <div class="row justify-content-md-center">
 
         <div id="stopsDashboard" style="margin-top: 20px">
-            <button type='button' class="btn btn-primary" id="newStopButton" data-toggle="modal" data-target="#newStopForm_Modal">                        
+            <button type='button' class="btn btn-primary" id="newStopButton" data-toggle="modal" data-target="#newStopForm_Modal" v-on:click='setMapInNewStopModal()'>                        
                     <i class="fas fa-plus"></i>
             </button>
 
@@ -71,6 +71,7 @@
                             <button type="button" class="close" data-dismiss="modal">&times;</button>
                         </div>
                         <div class="modal-body" id="newStop_modalBody">
+                            <div class="col-12">
                             <label for="stopsNumber">Número de parada:</label>
                             <input type="number" min="1" class="form-control" id="stopsNumber" v-model="newStop.number">
                             <label for="stopsName">Nombre de la parada:</label>
@@ -79,6 +80,11 @@
                             <input type="number" class="form-control" id="stopsLatitude" v-model="newStop.latitude"> 
                             <label for="stopsLongitude">Longitud:</label>
                             <input type="number" class="form-control" id="stopsLongitude" v-model="newStop.longitude">
+                            </div>
+                            <div class="col-12 googleMap">
+                                <h6 class="text text-center">Mueve el marcador en el mapa para crear una nueva parada</h4>
+                                <div id="map_newModal"></div>
+                            </div>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-primary" id="saveButton_Modal" v-on:click="createStop(newStop);">Grabar</button>
@@ -102,10 +108,10 @@
                             <input type="number" min="1" class="form-control" id="editedStopsNumber" v-model="editedStop.number">
                             <label for="editedStopsName">Nombre de la parada:</label>
                             <input type="text" class="form-control" id="editedStopsName" v-model="editedStop.name">
-                            <label for="editedStopsLatitude">Latitud:</label>
+                            <!--<label for="editedStopsLatitude">Latitud:</label>
                             <input type="number" class="form-control" id="editedStopsLatitude" v-model="editedStop.latitude"> 
                             <label for="editedStopsLongitude">Longitud:</label>
-                            <input type="number" class="form-control" id="editedStopsLongitude" v-model="editedStop.longitude">
+                            <input type="number" class="form-control" id="editedStopsLongitude" v-model="editedStop.longitude">-->
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-primary" id="saveButton_editModal" v-on:click="updateStop(editedStop.id, editedStop)">Grabar</button>
@@ -139,9 +145,12 @@
     </div>          
 
     <!-- Google Maps -->
-    <div id="map"></div>
-    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD-9eVfLZ8aOuIUrh84nDcvAZsS53RRoiQ&callback=stopApp">
-    </script>
+    <div class="googleMap">
+        <h3 class="text text-center">Puedes mover los marcadores de cada parada para actualizar su ubicación</h4>
+        <div id="map"></div>
+        <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD-9eVfLZ8aOuIUrh84nDcvAZsS53RRoiQ&callback=stopApp">
+        </script>
+    <div>
 
 </div>
 @endsection

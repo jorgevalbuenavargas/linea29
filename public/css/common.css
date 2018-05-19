@@ -57,11 +57,22 @@ body{
 #map {
     height: 400px;
     width: 100%;
+    margin-top: 10px
+}
+
+#map_newModal {
+    height: 200px;
+    width: 100%;
+    margin-top: 10px
 }
 
 #map_inRoutes {
     height: 400px;
     width: 100%;
+}
+
+.googleMap {
+    margin-top: 10px
 }
 
 .card-header {
