@@ -18,6 +18,44 @@ function stopApp(){
 
     // Google Maps Begining //
 
+    function obtainReverseGeocoding(lat, lng){
+        let jsonResult
+        let array_address
+        /*let xhttp = new XMLHttpRequest();
+        xhttp.open("GET", "https://maps.googleapis.com/maps/api/geocode/json?latlng=" + lat + "," + lng + "&key=AIzaSyD-9eVfLZ8aOuIUrh84nDcvAZsS53RRoiQ", true);
+        xhttp.send();
+        xhttp.onreadystatechange = function(){
+            if (xhttp.readyState == 4 && xhttp.status == 200) {
+                jsonResult = JSON.parse(xhttp.responseText);
+                array_address = jsonResult.results[0].formatted_address.split(",") 
+                return new Promise(function(resolve, reject) {
+                    setTimeout(function() {
+                      resolve(array_address[0]); 
+                    }, 3000);
+                  });
+            }
+        }*/
+        axios.get("https://maps.googleapis.com/maps/api/geocode/json",{
+            headers: {
+                'X-CSRF-Token': undefined,
+                'X-Requested-With': 'XMLHttpRequest',
+            },
+            responseType: 'json',
+            withCredentials: true,
+            params: {
+                latlng: lat + "," + lng,
+                key: "AIzaSyD-9eVfLZ8aOuIUrh84nDcvAZsS53RRoiQ"
+            },
+        })
+            .then(resp => {
+                console.log(resp.data)
+            })
+            .catch((err)=>
+            console.error(err.response ? err.response.data : err)
+        ) 
+        
+    }
+
     let directionsDisplay;
     let directionsService = new google.maps.DirectionsService();
     let map;
@@ -57,12 +95,16 @@ function stopApp(){
             });
         
             marker.addListener('dragend', function() {
-                state.newStop.number = state.branch.stops[state.branch.stops.length-1].number + 1 
-                document.getElementById("stopsNumber").value = state.branch.stops[state.branch.stops.length-1].number + 1
+                state.newStop.number = state.branch.stops.length > 0 ? state.branch.stops[state.branch.stops.length-1].number + 1 : 1
+                document.getElementById("stopsNumber").value = state.branch.stops.length > 0 ? state.branch.stops[state.branch.stops.length-1].number + 1 : 1
                 state.newStop.latitude = marker.position.lat()
                 state.newStop.longitude = marker.position.lng()
+                obtainReverseGeocoding(marker.position.lat(), marker.position.lng())
+                //state.newStop.name = obtainReverseGeocoding(marker.position.lat(), marker.position.lng()) 
+                //console.log(state.newStop.name)  
                 document.getElementById("stopsLatitude").value = marker.position.lat()
                 document.getElementById("stopsLongitude").value = marker.position.lng()
+                //document.getElementById("stopsName").value = obtainReverseGeocoding(marker.position.lat(), marker.position.lng())                
             });
     
         }, 500)
@@ -240,5 +282,10 @@ function stopApp(){
 }
 
 window.addEventListener("load", function(){
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
     stopApp()
 })
