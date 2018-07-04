@@ -17,6 +17,16 @@ class BranchController extends Controller
         $branch->stops;
         return $branch;
     }
+    
+    function getAllWithStops(){
+        $branches = Branch::all();
+        $branchesWithStops = [];
+        foreach ($branches as $branch) {
+            $branch->stops;
+            array_push($branchesWithStops, $branch);
+        }
+        return $branchesWithStops;
+    }
 
     function add(Request $req){
         $req->validate([

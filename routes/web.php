@@ -53,7 +53,7 @@ Route::delete('/stop/{id}','StopController@delete')->middleware('auth');
 
 /* Recorridos */
 
-Route::get('/busRoutes','BranchController@getAll');
+Route::get('/busRoutes','BranchController@getAllWithStops');
 
 Route::get('/busRoutes/{id}','BranchController@getById');
 
