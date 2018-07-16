@@ -52,7 +52,7 @@ function routeApp(){
                             routesDisplays[branch.id].setMap(map);
                             routesDisplays[branch.id].setDirections(result);
                             routesDisplays[branch.id].setOptions({
-                                suppressMarkers: true,
+                                suppressMarkers: false,
                                 polylineOptions : {
                                     strokeColor : color,
                                     visible: true

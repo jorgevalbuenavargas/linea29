@@ -1,4 +1,4 @@
-Pasos para instalar el proyecto.
+﻿Pasos para instalar el proyecto.
 
 1. Una vez descargado el proyecto a través del comando "git clone", se debe acceder a la carpeta del proyecto desde el CMD y correr el comando "composer install" para instalar todos los paquetes de composer.
 
@@ -18,6 +18,6 @@ Pasos para instalar el proyecto.
 
 6. En la carpeta sql_inserts se cuentan con comandos de SQL (INSERTS) que se deben correr en la consola de MySql para tener una base de branches y stops (así no se empieza con la carga de 0).
 
-7. Una vez realizado este último paso, se puede levantar el servidor con el comando "php artisan serve"
+7. Una vez realizado este último paso, se puede levantar el servidor con el comando "php artisan serve", si se desea cambiar el puerto se puede usar el comando "php artisan serve --port=8080"
 
 8. Para poder acceder a todas las funcionalidades del proyecto es IMPORTANTE crear un usuario desde la opción Register.

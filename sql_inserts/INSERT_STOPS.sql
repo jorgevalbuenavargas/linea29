@@ -1,4 +1,4 @@
-INSERT INTO stops(id,name,number,latitude,longitude,branch_id,created_at,updated_at) VALUES (18,'Av. Raúl Scalabrini Ortíz 85',1,-34.60150103,-58.44131361,1,'2018-04-14 17:24:46','2018-06-17 20:28:15');
+﻿INSERT INTO stops(id,name,number,latitude,longitude,branch_id,created_at,updated_at) VALUES (18,'Av. Raúl Scalabrini Ortíz 85',1,-34.60150103,-58.44131361,1,'2018-04-14 17:24:46','2018-06-17 20:28:15');
 INSERT INTO stops(id,name,number,latitude,longitude,branch_id,created_at,updated_at) VALUES (19,'Av. Raúl Scalabrini Ortíz 285',2,-34.60008805,-58.43895276,1,'2018-04-14 17:25:36','2018-06-17 20:28:05');
 INSERT INTO stops(id,name,number,latitude,longitude,branch_id,created_at,updated_at) VALUES (20,'Av. Raúl Scalabrini Ortíz 497',3,-34.59863929,-58.43673229,1,'2018-04-14 17:26:18','2018-06-17 20:27:54');
 INSERT INTO stops(id,name,number,latitude,longitude,branch_id,created_at,updated_at) VALUES (21,'Av. Raúl Scalabrini Ortíz 579',4,-34.59802053,-58.43574508,1,'2018-04-14 17:26:52','2018-06-17 20:27:42');
@@ -54,3 +54,28 @@ INSERT INTO stops(id,name,number,latitude,longitude,branch_id,created_at,updated
 INSERT INTO stops(id,name,number,latitude,longitude,branch_id,created_at,updated_at) VALUES (75,'Av. Corrientes 4310',8,-34.60275509,-58.42589936,6,'2018-06-17 22:41:43','2018-06-17 22:43:43');
 INSERT INTO stops(id,name,number,latitude,longitude,branch_id,created_at,updated_at) VALUES (76,'Av. Corrientes 4116',9,-34.6030708,-58.42283092,6,'2018-06-17 22:41:57','2018-06-17 22:44:33');
 INSERT INTO stops(id,name,number,latitude,longitude,branch_id,created_at,updated_at) VALUES (77,'Av. Corrientes 3816',10,-34.60352338,-58.4181907,6,'2018-06-17 22:42:12','2018-06-17 22:44:40');
+INSERT INTO stops(id,name,number,latitude,longitude,branch_id,created_at,updated_at) VALUES (80,'Av. Santa Fe 3618a',1,-34.58557259,-58.41542265,7,'2018-07-15 17:32:19','2018-07-15 17:35:21');
+INSERT INTO stops(id,name,number,latitude,longitude,branch_id,created_at,updated_at) VALUES (81,'Av. Santa Fe 3316',2,-34.58797951,-58.41184459,7,'2018-07-15 17:32:33','2018-07-15 17:35:34');
+INSERT INTO stops(id,name,number,latitude,longitude,branch_id,created_at,updated_at) VALUES (82,'Av. Santa Fe 3044',3,-34.59065573,-58.40832553,7,'2018-07-15 17:33:12','2018-07-15 17:35:51');
+INSERT INTO stops(id,name,number,latitude,longitude,branch_id,created_at,updated_at) VALUES (83,'Av. Santa Fe 2744',4,-34.59298743,-58.40569697,7,'2018-07-15 17:33:35','2018-07-15 17:36:01');
+INSERT INTO stops(id,name,number,latitude,longitude,branch_id,created_at,updated_at) VALUES (84,'Av. Santa Fe 2426',5,-34.59470082,-58.40156637,7,'2018-07-15 17:33:57','2018-07-15 17:36:18');
+INSERT INTO stops(id,name,number,latitude,longitude,branch_id,created_at,updated_at) VALUES (85,'Av. Santa Fe 2166',6,-34.59546036,-58.39822433,7,'2018-07-15 17:34:19','2018-07-15 17:36:29');
+INSERT INTO stops(id,name,number,latitude,longitude,branch_id,created_at,updated_at) VALUES (86,'Av. Santa Fe 1818',7,-34.59585337,-58.39357874,7,'2018-07-15 17:34:49','2018-07-15 17:36:40');
+INSERT INTO stops(id,name,number,latitude,longitude,branch_id,created_at,updated_at) VALUES (87,'Av. Santa Fe 1536',8,-34.59580921,-58.38886342,7,'2018-07-15 17:35:09','2018-07-15 17:36:51');
+INSERT INTO stops(id,name,number,latitude,longitude,branch_id,created_at,updated_at) VALUES (88,'Luis Viale 134',1,-34.60264028,-58.44442807,8,'2018-07-15 17:39:15','2018-07-15 17:41:46');
+INSERT INTO stops(id,name,number,latitude,longitude,branch_id,created_at,updated_at) VALUES (89,'Av. Dr. Honorio Pueyrredón 1342',2,-34.60521331,-58.44757916,8,'2018-07-15 17:39:24','2018-07-15 17:42:14');
+INSERT INTO stops(id,name,number,latitude,longitude,branch_id,created_at,updated_at) VALUES (90,'Av. Dr. Honorio Pueyrredón 1128',3,-34.60710865,-58.44603739,8,'2018-07-15 17:39:36','2018-07-15 17:42:30');
+INSERT INTO stops(id,name,number,latitude,longitude,branch_id,created_at,updated_at) VALUES (91,'Av. Díaz Vélez 5422',4,-34.60823896,-58.44304405,8,'2018-07-15 17:39:48','2018-07-15 17:43:21');
+INSERT INTO stops(id,name,number,latitude,longitude,branch_id,created_at,updated_at) VALUES (92,'Av. Acoyte 703',5,-34.61058781,-58.43946061,8,'2018-07-15 17:39:59','2018-07-15 17:43:36');
+INSERT INTO stops(id,name,number,latitude,longitude,branch_id,created_at,updated_at) VALUES (93,'Av. Acoyte 400',6,-34.61362534,-58.43813024,8,'2018-07-15 17:40:09','2018-07-15 17:44:06');
+INSERT INTO stops(id,name,number,latitude,longitude,branch_id,created_at,updated_at) VALUES (94,'Av. Acoyte 220',7,-34.61555023,-58.43767962,8,'2018-07-15 17:40:20','2018-07-15 17:43:56');
+INSERT INTO stops(id,name,number,latitude,longitude,branch_id,created_at,updated_at) VALUES (95,'Av. José María Moreno 57',8,-34.61885244,-58.43626342,8,'2018-07-15 17:40:32','2018-07-15 17:44:24');
+INSERT INTO stops(id,name,number,latitude,longitude,branch_id,created_at,updated_at) VALUES (96,'Av. José María Moreno 375',9,-34.62264896,-58.43481503,8,'2018-07-15 17:45:10','2018-07-15 17:45:25');
+INSERT INTO stops(id,name,number,latitude,longitude,branch_id,created_at,updated_at) VALUES (97,'Av. José María Moreno 785',10,-34.62764596,-58.43397818,8,'2018-07-15 17:45:41','2018-07-15 17:46:30');
+INSERT INTO stops(id,name,number,latitude,longitude,branch_id,created_at,updated_at) VALUES (98,'Av. José María Moreno 1089',11,-34.63126550,-58.43307696,8,'2018-07-15 17:45:55','2018-07-15 17:46:42');
+INSERT INTO stops(id,name,number,latitude,longitude,branch_id,created_at,updated_at) VALUES (99,'Av. José María Moreno 1293',12,-34.63377260,-58.43283019,8,'2018-07-15 17:46:05','2018-07-15 17:47:15');
+INSERT INTO stops(id,name,number,latitude,longitude,branch_id,created_at,updated_at) VALUES (100,'Av. José María Moreno 1475',13,-34.63576764,-58.43245468,8,'2018-07-15 17:46:18','2018-07-15 17:47:32');
+INSERT INTO stops(id,name,number,latitude,longitude,branch_id,created_at,updated_at) VALUES (101,'Av. José María Moreno 1763',14,-34.63905140,-58.43174658,8,'2018-07-15 17:48:14','2018-07-15 17:48:51');
+INSERT INTO stops(id,name,number,latitude,longitude,branch_id,created_at,updated_at) VALUES (102,'Av. José María Moreno 1979',15,-34.64128248,-58.43129712,8,'2018-07-15 17:48:27','2018-07-15 17:49:02');
+INSERT INTO stops(id,name,number,latitude,longitude,branch_id,created_at,updated_at) VALUES (103,'Av. Daract 2147',16,-34.64325301,-58.43099556,8,'2018-07-15 17:48:34','2018-07-15 17:49:13');
+
